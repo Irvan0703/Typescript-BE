@@ -22,6 +22,10 @@ Product.init({
         type: sequelize_1.DataTypes.NUMBER,
         allowNull: false,
     },
+    stock: {
+        type: sequelize_1.DataTypes.NUMBER,
+        allowNull: false,
+    },
     image_url: {
         type: sequelize_1.DataTypes.STRING(255),
         allowNull: true,

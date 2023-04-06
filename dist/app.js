@@ -6,11 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 var path = require('path');
+var bodyParser = require('body-parser');
 const product = require('./app/products/routes');
+const tag = require('./app/tags/routes');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', product);
+app.use(tag);
 app.use('/', function (req, res) {
     res.render('index', {
         title: 'Eduwork API Service'
