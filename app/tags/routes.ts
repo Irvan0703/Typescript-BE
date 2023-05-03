@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import Tag from "./model";
+import { isAuthenticated } from "../../middleware/checkJWT";
 const router = express.Router();
 
-router.get('/tags', async(req:Request,res:Response) => {
+router.get('/tags',isAuthenticated, async(req:Request,res:Response) => {
   try {
       await Tag.sync();
       const tags = await Tag.findAll();
@@ -12,7 +13,7 @@ router.get('/tags', async(req:Request,res:Response) => {
   }
 });
 
-router.post('/tags', async(req:Request,res:Response) => {
+router.post('/tags',isAuthenticated, async(req:Request,res:Response) => {
   const {name} = req.body;
   try {
       await Tag.sync();
@@ -25,7 +26,7 @@ router.post('/tags', async(req:Request,res:Response) => {
     }
 });
 
-router.put('/tags/:id',async(req:Request,res:Response) => {
+router.put('/tags/:id',isAuthenticated,async(req:Request,res:Response) => {
   const {name} = req.body;
   try {
       await Tag.sync();
@@ -42,7 +43,7 @@ router.put('/tags/:id',async(req:Request,res:Response) => {
     }
 });
 
-router.delete('/tags/:id',async(req:Request,res:Response) => {
+router.delete('/tags/:id',isAuthenticated,async(req:Request,res:Response) => {
   try {
       await Tag.sync();
       await Tag.destroy({

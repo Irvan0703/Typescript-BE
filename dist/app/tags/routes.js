@@ -14,8 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const model_1 = __importDefault(require("./model"));
+const checkJWT_1 = require("../../middleware/checkJWT");
 const router = express_1.default.Router();
-router.get('/tags', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/tags', checkJWT_1.isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield model_1.default.sync();
         const tags = yield model_1.default.findAll();
@@ -25,7 +26,7 @@ router.get('/tags', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.json(error);
     }
 }));
-router.post('/tags', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/tags', checkJWT_1.isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name } = req.body;
     try {
         yield model_1.default.sync();
@@ -38,7 +39,7 @@ router.post('/tags', (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.send({ 'error': error });
     }
 }));
-router.put('/tags/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/tags/:id', checkJWT_1.isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name } = req.body;
     try {
         yield model_1.default.sync();
@@ -55,7 +56,7 @@ router.put('/tags/:id', (req, res) => __awaiter(void 0, void 0, void 0, function
         res.send({ 'error': error });
     }
 }));
-router.delete('/tags/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/tags/:id', checkJWT_1.isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield model_1.default.sync();
         yield model_1.default.destroy({

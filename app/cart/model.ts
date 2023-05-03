@@ -1,13 +1,12 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../../database/db";
-import Product from "../products/model";
 
-class Category extends Model{
+class Cart extends Model{
   public id! : number;
   public name! : string;
 }
 
-Category.init(
+Cart.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -21,12 +20,10 @@ Category.init(
   },
   {
     sequelize,
-    tableName: 'categories',
+    tableName: 'tags',
     timestamps: true,
   }
 );
 
-Category.belongsToMany(Product, { through: 'category' });
-Product.belongsToMany(Product, { through: 'category' });
 
-export default Category;
+export default Cart;

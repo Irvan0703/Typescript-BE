@@ -1,12 +1,15 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../../database/db";
 
-class Tag extends Model{
-  public id! : number;
-  public name! : string;
+class Order extends Model{
+    public id! : number;
+    public qty! : number;
+    public status! : string;
+    public delivery_fee! : number;
+    public delivery_address! : number;
 }
 
-Tag.init(
+Order.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -26,4 +29,4 @@ Tag.init(
 );
 
 
-export default Tag;
+export default Order;
